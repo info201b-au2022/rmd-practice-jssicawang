@@ -1,6 +1,7 @@
 # A brief analysis of the NYT COVID-19 data
 
 # Load the tidyverse package
+install.packages("tidyverse")
 library(tidyverse)
 
 # Load the *national level* data into a variable. `national`
@@ -21,7 +22,7 @@ get_total_deaths <- function() {
   total_deaths <- national %>%
     filter(deaths == max(deaths)) %>%
     pull(deaths)
-  return(total_deaths)
+  return(prettyNum(total_deaths,big.mark=",",scientifit=FALSE)) #change here to include commas
 }
 
 # Run the following code to create a plot of cumulative cases over time
@@ -29,3 +30,4 @@ get_total_deaths <- function() {
 cases_plot <- ggplot(data = national) +
   geom_line(mapping = aes(x = as.Date(date), y = cases)) +
   labs(x = "Date", y = "Cumulative Cases", title = "U.S. COVID Cases")
+View(cases_plot)
